@@ -34,7 +34,6 @@ app.post('/messages', (req, res) => {
             message: "Your message was created successfully",
             data: message
         })
-        console.log(messages)
     } catch(err) {
         if(err instanceof ZodError) {
             return res.status(400).json({
@@ -59,8 +58,8 @@ app.get("/messages/:id", (req, res) => {
             message: "Message not found"
         })
         .parse(messageId)
-
-        const messageData = messages[messageId]
+        
+        const messageData = messages[validMessageId]
         res.json({
             success: true,
             data: messageData.message
