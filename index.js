@@ -18,7 +18,7 @@ const messageSchema = z.object({
 //     console.log(parsedResult)
 // })
 
-app.get('/message', (req, res) => {
+app.post('/messages', (req, res) => {
     try {
         const { message } = messageSchema.parse(req.body)
 
@@ -34,9 +34,10 @@ app.get('/message', (req, res) => {
             message: "Your message was created successfully",
             data: message
         })
+        console.log(messages)
     } catch(err) {
         if(err instanceof ZodError) {
-            res.status(400).json({
+            return res.status(400).json({
                 success: false,
                 errors: err.errors
             })
@@ -48,6 +49,32 @@ app.get('/message', (req, res) => {
     }
 })
 
+app.get("/messages/:id", (req, res) => {
+    try {
+        const messageId = parseInt(req.params.id, 10)
+        const validMessageId = z
+        .number()
+        .nonnegative()
+        .refine(id => id < messages.length, {
+            message: "Message not found"
+        })
+        .parse(messageId)
+
+        const messageData = messages[messageId]
+        res.json({
+            success: true,
+            data: messageData.message
+        })
+        
+
+    } catch(err) {
+        return res.status(500).json({
+            success: false,
+            message: "Message not found"
+        })
+    }
+})
+
 app.listen(PORT, () => {
-    console.log(`app listening on PORT ${PORT}`)
+    console.log(`Basic server running on <http://localhost>:${PORT}`)
 })
