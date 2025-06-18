@@ -1,0 +1,25 @@
+{
+  "name": "secretmessage",
+  "version": "1.0.0",
+  "description": "simple API where users can post, view, and delete secret messages",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "secretmessage": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pandeyshivam-debug/secretmessage.git"
+  },
+  "author": "shivam.pandey@minfytech.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pandeyshivam-debug/secretmessage/issues"
+  },
+  "homepage": "https://github.com/pandeyshivam-debug/secretmessage#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "zod": "^3.25.67"
+  }
+}
